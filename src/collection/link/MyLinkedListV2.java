@@ -1,6 +1,6 @@
 package collection.link;
 
-public class MyLinkedListV1 {
+public class MyLinkedListV2 {
 
     private Node first;
     private int size = 0;
@@ -24,11 +24,41 @@ public class MyLinkedListV1 {
         return x;
     }
 
+    // 첫번쨰 위치에 데이터 추가 코드 (newNode : 나의 노드)
+    public void add(int index, Object e) {
+        Node newNode = new Node(e);
+        if (index == 0) {
+            newNode.next = first;
+            first = newNode;
+        } else {
+            Node prev = getNode(index - 1); // 직전 노드 탐색
+            newNode.next = prev.next;
+            prev.next = newNode;
+        }
+        size++;
+    }
+
     public Object set(int index, Object element) {
         Node x = getNode(index);
         Object oldValue = x.item;
         x.item = element;
         return oldValue;
+    }
+
+    // 추가 코드 : 첫번째 위치의 데이터 삭제
+    public Object remove(int index) {
+        Node removeNode = getNode(index); // 삭제할 위치를 찾는다
+        Object removeItem = removeNode.item; // 삭제할 아이템 꺼낸다
+        if (index == 0) {
+            first = removeNode.next; // removeNode 가 첫번째 노드가된다.
+        } else {
+            Node prev = getNode(index - 1);
+            prev.next = removeNode.next;
+        }
+        removeNode.item = null;
+        removeNode.next = null;
+        size--;
+        return removeItem;
     }
 
     public Object get(int index) {
@@ -62,9 +92,9 @@ public class MyLinkedListV1 {
 
     @Override
     public String toString() {
-        return "MyLinkedListV1{" +
-                "first=" + first +
-                ", size=" + size +
+        return "LinkedV2 {" +
+                "first : " + first +
+                ", size : " + size +
                 '}';
     }
 }
