@@ -9,8 +9,7 @@ public class JavaSetMain {
         run(new HashSet<>()); // HashSet<> : hashCode 기반의 순서대로 출력 : O(1)
         run(new LinkedHashSet<>()); // LinkedHashSet<> : 입력한 순서대로 출력 : O(1)
         run(new TreeSet<>()); // TreeSet<> : 순서 정렬 후 출력 : O(log n)
-
-
+        
     }
 
     private static void run(Set<String> set) {
